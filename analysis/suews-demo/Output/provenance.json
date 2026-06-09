@@ -1,0 +1,35 @@
+{
+  "purpose": "SUEWS Community Hackathon practice smoke test",
+  "case_type": "demo",
+  "created_at_utc": "2026-06-09T20:22:46Z",
+  "repository": "https://github.com/vitorlavor/suews-hackathon-practice",
+  "tooling": {
+    "agent_plugin": "suews@suews 0.2.0",
+    "mcp_bootstrap": "uvx --from git+https://github.com/UMEP-dev/SUEWS.git#subdirectory=mcp suews-mcp",
+    "schema_version": "2026.5",
+    "suews_version": "2026.6.5",
+    "supy_version": "2026.6.5",
+    "suews_git_commit": "9dae7a8"
+  },
+  "commands": [
+    "suews init --template simple-urban --format json analysis/suews-demo",
+    "suews inspect --format json analysis/suews-demo/sample_config.yml",
+    "suews validate --format json analysis/suews-demo/sample_config.yml",
+    "suews run analysis/suews-demo/updated_sample_config.yml",
+    "suews diagnose --format json analysis/suews-demo/Output",
+    "suews summarise --format json --variables QN,QH,QE,QS,T2,RH2 analysis/suews-demo/Output"
+  ],
+  "inputs": {
+    "config": "analysis/suews-demo/updated_sample_config.yml",
+    "forcing": "analysis/suews-demo/Kc_2012_data_60.txt",
+    "site": "KCL sample site, London",
+    "simulation_period_reported_by_suews": "2012-01-01 00:05:00 to 2013-01-01 00:00:00"
+  },
+  "outputs": {
+    "suews_output": "analysis/suews-demo/Output/KCL1_2012_SUEWS_60.txt",
+    "checkpoint": "analysis/suews-demo/Output/KCL_SUEWS_checkpoint.json",
+    "diagnostics": "analysis/suews-demo/Output/diagnostics.json",
+    "summary": "analysis/suews-demo/run-summary.md"
+  },
+  "caveat": "This is the bundled KCL/London sample case. It verifies the local SUEWS toolchain end to end, but it is not a site-specific hackathon analysis."
+}
